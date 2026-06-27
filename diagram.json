@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "author": "Grant Erickson",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-arduino-nano", "id": "nano", "top": 290, "left": 360, "attrs": {} },
+
+    { "type": "wokwi-servo", "id": "servoTop", "top": 140, "left": 200, "rotate": 180,
+      "attrs": { "hornColor": "#aaaaaa" } },
+    { "type": "wokwi-servo", "id": "servoBottom", "top": 410, "left": 200, "rotate": 180,
+      "attrs": { "hornColor": "#aaaaaa" } },
+
+    { "type": "wokwi-led", "id": "led1", "top": 80, "left": 470,
+      "attrs": { "color": "white", "label": "Left eye" } },
+    { "type": "wokwi-resistor", "id": "r1", "top": 165, "left": 484, "rotate": 90,
+      "attrs": { "value": "330" } },
+    { "type": "wokwi-led", "id": "led2", "top": 80, "left": 524,
+      "attrs": { "color": "white", "label": "Right eye" } },
+    { "type": "wokwi-resistor", "id": "r2", "top": 165, "left": 538, "rotate": 90,
+      "attrs": { "value": "330" } },
+
+    { "type": "wokwi-pushbutton", "id": "btn", "top": 90, "left": 640,
+      "attrs": { "color": "red", "label": "OPEN / CLOSE" } },
+
+    { "type": "wokwi-pushbutton", "id": "touch", "top": 230, "left": 640,
+      "attrs": { "color": "green", "label": "TTP223 (tap)" } },
+    { "type": "wokwi-resistor", "id": "rpull", "top": 230, "left": 740, "rotate": 90,
+      "attrs": { "value": "10000" } },
+
+    { "type": "wokwi-potentiometer", "id": "pot", "top": 500, "left": 470,
+      "attrs": { "value": "512" } }
+  ],
+  "connections": [
+    [ "nano:6", "r1:1", "green", [] ],
+    [ "r1:2", "led1:A", "green", [] ],
+    [ "led1:C", "nano:GND.2", "black", [] ],
+    [ "led2:C", "led1:C", "black", [] ],
+    [ "nano:6", "r2:1", "green", [] ],
+    [ "r2:2", "led2:A", "green", [] ],
+
+    [ "nano:9", "servoTop:PWM", "blue", [] ],
+    [ "nano:10", "servoBottom:PWM", "cyan", [] ],
+    [ "nano:5V", "servoBottom:V+", "red", [ "v60", "h-230" ] ],
+    [ "servoBottom:V+", "servoTop:V+", "red", [] ],
+    [ "nano:GND.1", "servoBottom:GND", "black", [ "v75", "h-255" ] ],
+    [ "servoBottom:GND", "servoTop:GND", "black", [] ],
+
+    [ "pot:SIG", "nano:A0", "yellow", [] ],
+    [ "pot:VCC", "nano:5V", "red", [] ],
+    [ "pot:GND", "nano:GND.1", "black", [] ],
+
+    [ "btn:1.l", "nano:2", "orange", [] ],
+    [ "btn:2.l", "nano:GND.2", "black", [] ],
+
+    [ "touch:2.l", "nano:3", "purple", [] ],
+    [ "touch:1.l", "nano:5V", "red", [ "v240", "h-210" ] ],
+    [ "rpull:1", "nano:3", "purple", [] ],
+    [ "rpull:2", "nano:GND.2", "black", [] ]
+  ],
+  "dependencies": {}
+}
