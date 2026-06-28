@@ -63,6 +63,11 @@ These match the constants at the top of [IronManMaskController.ino](IronManMaskC
 
 ## Circuit diagram
 
+![IronManMaskController wiring diagram](IronManCircuit.png)
+
+The diagram above shows the complete wiring. The text schematics below break out
+each section if you prefer a pin-by-pin reference.
+
 ### Overview
 
 ```
@@ -128,6 +133,43 @@ and PWM-dims them — no transistor needed.
    +5–6V ── both servos  V+   (red)     ◄── from the battery rail
    GND   ── both servos  GND  (brown/black)
 ```
+
+---
+
+## Edit & simulate the circuit online (Wokwi)
+
+This repo includes an editable [Wokwi](https://wokwi.com) project so you can
+rearrange the wiring — and even **run the firmware in a live simulator** — using a
+free, browser-based tool (no install).
+
+Project files:
+
+- [diagram.json](diagram.json) — the circuit (parts + wiring).
+- [libraries.txt](libraries.txt) — tells Wokwi to load the `ServoEasing` library.
+
+**To open it:**
+
+1. Go to <https://wokwi.com>, sign in (free), and create a new **Arduino Nano**
+   project.
+2. Replace the contents of the project's `sketch.ino` with
+   [IronManMaskController.ino](IronManMaskController.ino).
+3. Click the `diagram.json` tab and paste in this repo's
+   [diagram.json](diagram.json).
+4. Add the **ServoEasing** library: in the **Library Manager** (the 📚 / "+" in
+   the Libraries panel) search for `ServoEasing` and add it. (The included
+   [libraries.txt](libraries.txt) covers this if you import the files directly.)
+5. Press the green ▶ to start the simulation. Click the **red button** (or the
+   **green touch-sensor stand-in**) to open/close the mask, and drag the
+   **potentiometer** to dim the eyes.
+
+**About the tap sensor in the sim:** Wokwi has no TTP223 part, so the diagram
+mimics it with a second push button wired active-HIGH (to `5V`) plus a 10 kΩ
+pull-down on `D3` — that reproduces the TTP223's "HIGH when touched" behavior. On
+your real hardware this is the TTP223 module (`VCC`/`GND`/`SIG` → `5V`/`GND`/`D3`).
+
+> The simulated battery/servo power comes from the Nano's `5V` pin for
+> convenience. On the real build, still power the servos from the battery rail as
+> described below.
 
 ---
 

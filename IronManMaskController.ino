@@ -12,10 +12,13 @@
  *   6. The eyes automatically switch off 10 minutes after they come on.
  *
  * Requires the "ServoEasing" library (install via the Library Manager).
+ * NOTE: ServoEasing keeps its implementation in ServoEasing.hpp, so the main
+ * sketch must include the .hpp (exactly once) - including only the .h leaves
+ * every ServoEasing symbol unresolved at link time ("undefined reference").
  * --------------------------------------------------------------------------
  */
 
-#include "ServoEasing.h"
+#include "ServoEasing.hpp"
 
 // ----------------------------- Pin assignments ----------------------------
 const uint8_t BUTTON_PIN        = 2;   // momentary push button -> GND (INPUT_PULLUP)

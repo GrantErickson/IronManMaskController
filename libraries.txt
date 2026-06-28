@@ -1,0 +1,6 @@
+# Wokwi libraries (https://docs.wokwi.com/guides/libraries)
+# One Arduino library per line. Wokwi installs these for the simulation.
+ServoEasing
+# ServoEasing depends on the Arduino Servo library; Wokwi does not pull in
+# a library's dependencies automatically, so it must be listed explicitly.
+Servo
